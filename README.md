@@ -17,7 +17,9 @@ Examples of usage:
 2. PinnedArrayFactory\<UnmanagedFactory\>.CreateArray('a', 'b', 'c'); //params constructor
 3. PinnedArrayFactory\<UnmanagedFactory\>.GetFactory().Create\<char\>(3); //the same as 1.
 4. PinnedArrayFactory\<UnmanagedFactory\>.GetFactory().Create('a', 'b', 'c'); //the same as 2.
-5. The direct constructor of the 'PinnedArrays.UnmanagedArray' class can also be used.
+5. UnmanagedFactory.CreateArray\<char\>(3); //the same as 1.
+6. UnmanagedFactory.CreateArray('a', 'b', 'c'); //the same as 2.
+7. The direct constructor of the 'PinnedArrays.UnmanagedArray' class can also be used.
 
 > To create managed pinned array replace *UnmanagedFactory* with *ManagedFactory* in the examples above.
 
