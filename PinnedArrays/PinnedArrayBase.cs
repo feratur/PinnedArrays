@@ -4,16 +4,15 @@ using System.Collections.Generic;
 
 namespace PinnedArrays
 {
+    /// <summary>
+    /// A base class for pinned arrays.
+    /// </summary>
+    /// <typeparam name="T">The type of the elements of the array (only struct).</typeparam>
     public abstract class PinnedArrayBase<T> : IPinnedArray<T> where T : struct
     {
         public abstract T this[int index] { get; set; }
         public abstract IntPtr GetPtr();
         public int Length { get; private set; }
-
-        protected PinnedArrayBase(int length)
-        {
-            Length = length;
-        }
 
         public abstract void Dispose();
 
@@ -26,6 +25,15 @@ namespace PinnedArrays
         IEnumerator IEnumerable.GetEnumerator()
         {
             return GetEnumerator();
+        }
+
+        /// <summary>
+        /// A base constructor to define the capacity of the pinned array.
+        /// </summary>
+        /// <param name="length">The capacity of the array.</param>
+        protected PinnedArrayBase(int length)
+        {
+            Length = length;
         }
     }
 }

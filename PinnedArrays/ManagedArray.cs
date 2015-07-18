@@ -3,6 +3,11 @@ using System.Runtime.InteropServices;
 
 namespace PinnedArrays
 {
+    /// <summary>
+    /// Managed array with pinned GC handle
+    /// (the address of the object can be taken as the array will not be moved by the GC).
+    /// </summary>
+    /// <typeparam name="T">The type of the elements of the array (only struct).</typeparam>
     public class ManagedArray<T> : PinnedArrayBase<T> where T : struct
     {
         private bool _disposed;
@@ -44,6 +49,10 @@ namespace PinnedArrays
             _arrayHandle = GCHandle.Alloc(_array, GCHandleType.Pinned);
         }
 
+        /// <summary>
+        /// Construct a ManagedArray object.
+        /// </summary>
+        /// <param name="length">The capacity of the array.</param>
         public ManagedArray(int length)
             : base(length)
         {
@@ -51,10 +60,15 @@ namespace PinnedArrays
             AllocHandle();
         }
 
-        public ManagedArray(params T[] values)
+        /// <summary>
+        /// Construct a ManagedArray object.
+        /// </summary>
+        /// <param name="copy">Specify whether the 'values' array should be copied to a new array.</param>
+        /// <param name="values">The values to initialize the array with.</param>
+        public ManagedArray(bool copy, params T[] values)
             : base(values.Length)
         {
-            _array = (T[])values.Clone();
+            _array = copy ? (T[])values.Clone() : values;
             AllocHandle();
         }
     }
